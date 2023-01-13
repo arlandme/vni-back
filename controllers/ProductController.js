@@ -7,7 +7,7 @@ class ProductController {
     // let page = req.body.page || 1;
     // let pageSize = req.body.pageSize || 10;
     let sortName = req.body.sortName;
-    let sort = {};
+    let sort = {order: -1};
     const myQuery = {
       id: { $exists: true },
       name: { $regex: `.*${req.body.name}.*`, $options: 'i' },
@@ -37,9 +37,9 @@ class ProductController {
     ];
 
     if (sortName) {
-      if (sortName) sort.name = sortName;
-      aggregateQuery.push({ $sort: sort });
+      sort.name = sortName;
     }
+    aggregateQuery.push({ $sort: sort });
 
     Product.aggregate(aggregateQuery)
       // .skip(page * pageSize - pageSize)
@@ -152,6 +152,7 @@ class ProductController {
         product.thumbnail = req.body.thumbnail;
         product.createdId = ObjectId(req.body.createdId);
         product.updatedId = ObjectId(req.body.updatedId);
+        product.order = req.body.order;
         product.save((err) => {
           if (err) return res.status(500).json({ message: err.message });
           else res.status(200).json({ message: 'Updated successful!' });

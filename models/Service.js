@@ -28,6 +28,10 @@ const serviceSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    order: {
+        type: Number,
+        default: 0,
+    },
     createdId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

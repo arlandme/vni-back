@@ -22,6 +22,10 @@ const slideSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    order: {
+        type: Number,
+        default: 0,
+    },
     active: {
         type: Boolean,
         required: true,

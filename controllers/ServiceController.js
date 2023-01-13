@@ -7,7 +7,7 @@ class ServiceController {
     // let page = req.body.page || 1;
     // let pageSize = req.body.pageSize || 10;
     let sortTitle = req.body.sortTitle;
-    let sort = {};
+    let sort = {order: -1};
     const myQuery = {
       id: { $exists: true },
       title: { $regex: `.*${req.body.title}.*`, $options: 'i' },
@@ -154,6 +154,7 @@ class ServiceController {
         service.thumbnail = req.body.thumbnail;
         service.createdId = ObjectId(req.body.createdId);
         service.updatedId = ObjectId(req.body.updatedId);
+        service.order = req.body.order;
         service.save((err) => {
           if (err) return res.status(500).json({ message: err.message });
           else res.status(200).json({ message: 'Updated successful!' });

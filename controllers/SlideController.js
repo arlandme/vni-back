@@ -16,7 +16,7 @@ class SlideController {
     };
 
     Slide.find(myQuery)
-      .sort(sort ? { title: sort } : '')
+      .sort(sort ? { title: sort, order: -1 } : {order: -1})
       // .skip(page * pageSize - pageSize)
       // .limit(pageSize)
       .then((slides) => res.json(slides))
@@ -74,6 +74,7 @@ class SlideController {
         slide.contentLink = req.body.contentLink;
         slide.backgroundImage = req.body.backgroundImage;
         slide.redirectTo = req.body.redirectTo;
+        slide.order = req.body.order;
         slide.save((err) => {
           if (err) return res.status(500).json({ message: err.message });
           else res.status(200).json({ message: 'Updated successful!' });

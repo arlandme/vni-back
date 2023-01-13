@@ -37,9 +37,9 @@ class ServiceController {
     ];
 
     if (sortTitle) {
-      if (sortTitle) sort.title = sortTitle;
-      aggregateQuery.push({ $sort: sort });
+      sort.title = sortTitle;
     }
+    aggregateQuery.push({ $sort: sort });
 
     Service.aggregate(aggregateQuery)
       // .skip(page * pageSize - pageSize)

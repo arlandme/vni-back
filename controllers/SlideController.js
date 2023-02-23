@@ -51,6 +51,7 @@ class SlideController {
           backgroundImage: req.body.backgroundImage,
           contentLink: req.body.contentLink,
           redirectTo: req.body.redirectTo,
+          description: req.body.description,
         });
         slide.save((err, slide) => {
           if (err) {
@@ -75,6 +76,7 @@ class SlideController {
         slide.backgroundImage = req.body.backgroundImage;
         slide.redirectTo = req.body.redirectTo;
         slide.order = req.body.order;
+        slide.description = req.body.description,
         slide.save((err) => {
           if (err) return res.status(500).json({ message: err.message });
           else res.status(200).json({ message: 'Updated successful!' });
